@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "decode:block/batbox_front",
+    "bottom": "decode:block/batbox_bottom",
+    "top": "decode:block/batbox_top",
+    "north": "decode:block/batbox_back",
+    "south": "decode:block/batbox_front",
+    "west": "decode:block/batbox_leftright",
+    "east": "decode:block/batbox_leftright"
+  }
+}

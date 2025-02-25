@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "decode:block/custom_block" }
+  }
+}
