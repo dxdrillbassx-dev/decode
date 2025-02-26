@@ -16,7 +16,6 @@ public class ExpCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрируем команду /exp give
         dispatcher.register(Commands.literal("exp")
                 .then(Commands.literal("give")
                         .then(Commands.argument("amount", IntegerArgumentType.integer(1))
@@ -26,15 +25,19 @@ public class ExpCommand {
     }
 
     private static int giveExp(CommandSourceStack source, int amount) {
-        // Проверяем, является ли командующий игроком
+
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.exp.give.failure.not_player"));
             return 0;
         }
 
-        // Выдаем опыт игроку
+        if (amount <= 0) {
+            source.sendFailure(Component.translatable("command.exp.give.failure.invalid_amount"));
+            return 0;
+        }
+
         player.giveExperiencePoints(amount);
-        player.sendSystemMessage(Component.literal("Вы получили " + amount + " опыта!"));
+        source.sendSuccess(Component.translatable("command.exp.give.success", amount), true);
 
         return 1;
     }

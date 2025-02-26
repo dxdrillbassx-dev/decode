@@ -70,14 +70,14 @@ public class CondenseCommand {
 
     private static int condenseItems(CommandSourceStack source, String itemName) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.condense.only_players"));
             return 0;
         }
 
         // Преобразование строки itemName в соответствующий предмет
         Item item = getItemFromName(itemName);
         if (item == null) {
-            source.sendFailure(Component.literal("Невозможно найти предмет с именем: " + itemName));
+            source.sendFailure(Component.translatable("command.condense.item_not_found", itemName));
             return 0;
         }
 
@@ -85,21 +85,21 @@ public class CondenseCommand {
         if (item instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
             if (block == Blocks.AIR) {
-                source.sendFailure(Component.literal("Этот предмет не может быть конденсирован в блок."));
+                source.sendFailure(Component.translatable("command.condense.cannot_condense"));
                 return 0;
             }
 
             // Создаем ItemStack для блока и добавляем его в инвентарь игрока
             ItemStack itemStack = new ItemStack(blockItem);
             if (!player.getInventory().add(itemStack)) {
-                source.sendFailure(Component.literal("Не удалось добавить блок в инвентарь."));
+                source.sendFailure(Component.translatable("command.condense.add_block_failed"));
                 return 0;
             }
 
-            source.sendSuccess(Component.literal("Предмет " + itemName + " был конденсирован в блок."), true);
+            source.sendSuccess(Component.translatable("command.condense.item_condensed", itemName), true);
             return 1;
         } else {
-            source.sendFailure(Component.literal("Этот предмет не является блоком."));
+            source.sendFailure(Component.translatable("command.condense.item_is_not_block"));
             return 0;
         }
     }

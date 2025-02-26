@@ -26,7 +26,13 @@ public class GodCommand {
 
     private static int toggleGodMode(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.god.only_players"));
+            return 0;
+        }
+
+        // Проверка прав игрока (например, администратор)
+        if (!source.hasPermission(2)) { // Уровень 2 — администратор
+            source.sendFailure(Component.translatable("command.god.no_permission"));
             return 0;
         }
 
@@ -35,11 +41,11 @@ public class GodCommand {
         if (godModePlayers.contains(playerId)) {
             godModePlayers.remove(playerId);
             player.setInvulnerable(false);
-            player.sendSystemMessage(Component.literal("Режим бессмертия отключен"));
+            player.sendSystemMessage(Component.translatable("command.god.disabled"));
         } else {
             godModePlayers.add(playerId);
             player.setInvulnerable(true);
-            player.sendSystemMessage(Component.literal("Режим бессмертия включен"));
+            player.sendSystemMessage(Component.translatable("command.god.enabled"));
         }
 
         return 1;

@@ -23,7 +23,6 @@ import java.util.Map;
 @Mod.EventBusSubscriber
 public class EditSignCommand {
 
-    // Буфер обмена для хранения текста табличек
     private static final Map<ServerPlayer, String[]> clipboard = new HashMap<>();
 
     @SubscribeEvent
@@ -50,14 +49,13 @@ public class EditSignCommand {
 
     private static int setSignText(CommandSourceStack source, int line, String text) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.editsign.only_players"));
             return 0;
         }
 
-        // Получаем луч, на который смотрит игрок
-        HitResult result = player.pick(5.0, 1.0f, false); // 5.0 - дистанция, 1.0 - угол обзора
+        HitResult result = player.pick(5.0, 1.0f, false);
         if (result.getType() != HitResult.Type.BLOCK) {
-            source.sendFailure(Component.literal("Не на блок смотрите!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_block"));
             return 0;
         }
 
@@ -66,33 +64,32 @@ public class EditSignCommand {
         BlockState state = player.getLevel().getBlockState(pos);
 
         if (!(state.getBlock() instanceof SignBlock)) {
-            source.sendFailure(Component.literal("Вы не смотрите на табличку!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_sign"));
             return 0;
         }
 
         SignBlockEntity sign = (SignBlockEntity) player.getLevel().getBlockEntity(pos);
         if (sign == null) {
-            source.sendFailure(Component.literal("Ошибка получения таблички!"));
+            source.sendFailure(Component.translatable("command.editsign.error_getting_sign"));
             return 0;
         }
 
         sign.setMessage(line, Component.literal(text));
         sign.setChanged();
-        source.sendSuccess(Component.literal("Текст на табличке изменён!"), true);
+        source.sendSuccess(Component.translatable("command.editsign.text_changed"), true);
 
         return 1;
     }
 
     private static int clearSign(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.editsign.only_players"));
             return 0;
         }
 
-        // Получаем луч, на который смотрит игрок
         HitResult result = player.pick(5.0, 1.0f, false);
         if (result.getType() != HitResult.Type.BLOCK) {
-            source.sendFailure(Component.literal("Не на блок смотрите!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_block"));
             return 0;
         }
 
@@ -101,13 +98,13 @@ public class EditSignCommand {
         BlockState state = player.getLevel().getBlockState(pos);
 
         if (!(state.getBlock() instanceof SignBlock)) {
-            source.sendFailure(Component.literal("Вы не смотрите на табличку!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_sign"));
             return 0;
         }
 
         SignBlockEntity sign = (SignBlockEntity) player.getLevel().getBlockEntity(pos);
         if (sign == null) {
-            source.sendFailure(Component.literal("Ошибка получения таблички!"));
+            source.sendFailure(Component.translatable("command.editsign.error_getting_sign"));
             return 0;
         }
 
@@ -116,21 +113,20 @@ public class EditSignCommand {
         }
 
         sign.setChanged();
-        source.sendSuccess(Component.literal("Табличка очищена!"), true);
+        source.sendSuccess(Component.translatable("command.editsign.cleared"), true);
 
         return 1;
     }
 
     private static int copySign(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.editsign.only_players"));
             return 0;
         }
 
-        // Получаем луч, на который смотрит игрок
         HitResult result = player.pick(5.0, 1.0f, false);
         if (result.getType() != HitResult.Type.BLOCK) {
-            source.sendFailure(Component.literal("Не на блок смотрите!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_block"));
             return 0;
         }
 
@@ -139,13 +135,13 @@ public class EditSignCommand {
         BlockState state = player.getLevel().getBlockState(pos);
 
         if (!(state.getBlock() instanceof SignBlock)) {
-            source.sendFailure(Component.literal("Вы не смотрите на табличку!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_sign"));
             return 0;
         }
 
         SignBlockEntity sign = (SignBlockEntity) player.getLevel().getBlockEntity(pos);
         if (sign == null) {
-            source.sendFailure(Component.literal("Ошибка получения таблички!"));
+            source.sendFailure(Component.translatable("command.editsign.error_getting_sign"));
             return 0;
         }
 
@@ -155,21 +151,20 @@ public class EditSignCommand {
         }
 
         clipboard.put(player, copiedText);
-        source.sendSuccess(Component.literal("Табличка скопирована!"), true);
+        source.sendSuccess(Component.translatable("command.editsign.copied"), true);
 
         return 1;
     }
 
     private static int pasteSign(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.editsign.only_players"));
             return 0;
         }
 
-        // Получаем луч, на который смотрит игрок
         HitResult result = player.pick(5.0, 1.0f, false);
         if (result.getType() != HitResult.Type.BLOCK) {
-            source.sendFailure(Component.literal("Не на блок смотрите!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_block"));
             return 0;
         }
 
@@ -178,18 +173,18 @@ public class EditSignCommand {
         BlockState state = player.getLevel().getBlockState(pos);
 
         if (!(state.getBlock() instanceof SignBlock)) {
-            source.sendFailure(Component.literal("Вы не смотрите на табличку!"));
+            source.sendFailure(Component.translatable("command.editsign.not_looking_at_sign"));
             return 0;
         }
 
         if (!clipboard.containsKey(player)) {
-            source.sendFailure(Component.literal("Буфер обмена пуст!"));
+            source.sendFailure(Component.translatable("command.editsign.clipboard_empty"));
             return 0;
         }
 
         SignBlockEntity sign = (SignBlockEntity) player.getLevel().getBlockEntity(pos);
         if (sign == null) {
-            source.sendFailure(Component.literal("Ошибка получения таблички!"));
+            source.sendFailure(Component.translatable("command.editsign.error_getting_sign"));
             return 0;
         }
 
@@ -199,7 +194,7 @@ public class EditSignCommand {
         }
 
         sign.setChanged();
-        source.sendSuccess(Component.literal("Текст вставлен в табличку!"), true);
+        source.sendSuccess(Component.translatable("command.editsign.text_pasted"), true);
 
         return 1;
     }

@@ -61,5 +61,61 @@
   "command.reply.no_messages": "Вы не можете ответить, так как не было получено сообщений!",
   "command.reply.player_not_found": "Игрок с таким именем не найден!",
   "command.reply.sender_message": "%s -> %s",
-  "command.reply.receiver_message": "Вы -> %s"
+  "command.reply.receiver_message": "Вы -> %s",
+
+  "command.editsign.only_players": "Эту команду могут использовать только игроки!",
+  "command.editsign.not_looking_at_block": "Вы должны смотреть на блок!",
+  "command.editsign.not_looking_at_sign": "Вы не смотрите на табличку!",
+  "command.editsign.error_getting_sign": "Ошибка при получении таблички!",
+  "command.editsign.text_changed": "Текст на табличке изменён!",
+  "command.editsign.cleared": "Табличка очищена!",
+  "command.editsign.copied": "Табличка скопирована!",
+  "command.editsign.clipboard_empty": "Буфер обмена пуст!",
+  "command.editsign.text_pasted": "Текст вставлен на табличку!",
+
+  "command.sethome.only_players": "Только игроки могут использовать эту команду!",
+  "command.sethome.max_homes": "Вы можете иметь только %d точки дома!",
+  "command.sethome.saved": "Точка дома '%s' сохранена!",
+  "command.teleporthome.only_players": "Только игроки могут использовать эту команду!",
+  "command.teleporthome.not_found": "Точка дома '%s' не найдена!",
+  "command.teleporthome.teleported": "Телепортация к дому '%s'!",
+  "command.listhomes.only_players": "Только игроки могут использовать эту команду!",
+  "command.listhomes.no_homes": "У вас нет сохраненных точек дома!",
+
+  "command.book.only_players": "Только игроки могут использовать эту команду!",
+  "command.book.issued": "Книга с идентификатором '%s' выдана игроку.",
+
+  "command.clearinventory.only_players": "Только игроки могут использовать эту команду!",
+  "command.clearinventory.inventory_cleared": "Ваш инвентарь был очищен",
+  "command.clearinventory.player_not_found": "Игрок с таким именем не найден",
+  "command.clearinventory.inventory_cleared_admin": "Ваш инвентарь был очищен администратором '%s'",
+  "command.clearinventory.inventory_cleared_target": "Инвентарь игрока '%s' был очищен",
+
+  "command.condense.only_players": "Только игроки могут использовать эту команду!",
+  "command.condense.item_not_found": "Невозможно найти предмет с именем: %s",
+  "command.condense.cannot_condense": "Этот предмет не может быть конденсирован в блок.",
+  "command.condense.item_is_not_block": "Этот предмет не является блоком.",
+  "command.condense.item_condensed": "Предмет %s был конденсирован в блок.",
+  "command.condense.add_block_failed": "Не удалось добавить блок в инвентарь.",
+
+  "command.exp.give.success": "Вы получили %s опыта!",
+  "command.exp.give.failure.not_player": "Только игроки могут использовать эту команду!",
+  "command.exp.give.failure.invalid_amount": "Количество опыта должно быть положительным числом!",
+
+  "command.fly.toggle.on": "Режим полета включен",
+  "command.fly.toggle.off": "Режим полета отключен",
+  "command.fly.only_players": "Только игроки могут использовать эту команду!",
+
+  "command.getpos.player_not_found": "Игрок с таким именем не найден!",
+  "command.getpos.only_players": "Только игроки могут использовать эту команду!",
+  "command.getpos.coordinates_self": "Вы находитесь в координатах: X={x}, Y={y}, Z={z}",
+  "command.getpos.coordinates_other": "{playerName} находится в координатах: X={x}, Y={y}, Z={z}",
+
+  "command.gm.only_players": "Только игроки могут использовать эту команду!",
+  "command.gm.mode_changed": "Гейм-мод изменен на: {mode}",
+
+  "command.god.only_players": "Только игроки могут использовать эту команду!",
+  "command.god.enabled": "Режим бессмертия включен",
+  "command.god.disabled": "Режим бессмертия отключен",
+  "command.god.no_permission": "У вас нет прав для использования этой команды!"
 }

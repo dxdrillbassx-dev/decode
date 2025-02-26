@@ -27,7 +27,7 @@ public class FlyCommand {
     private static int toggleFly(CommandSourceStack source) {
         // Проверяем, является ли командующий игроком
         if (!(source.getEntity() instanceof Player player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.fly.only_players"));
             return 0;
         }
 
@@ -38,11 +38,11 @@ public class FlyCommand {
         if (isFlying) {
             player.getAbilities().flying = false;
             player.getAbilities().mayfly = false;  // Разрешение на полет в общем случае
-            player.sendSystemMessage(Component.literal("Режим полета отключен"));
+            player.sendSystemMessage(Component.translatable("command.fly.toggle.off"));
         } else {
             player.getAbilities().flying = true;
             player.getAbilities().mayfly = true;  // Разрешение на полет
-            player.sendSystemMessage(Component.literal("Режим полета включен"));
+            player.sendSystemMessage(Component.translatable("command.fly.toggle.on"));
         }
 
         // Обновляем способности игрока

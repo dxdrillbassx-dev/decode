@@ -17,79 +17,40 @@ public class GMCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрируем команду для различных гейм-модов и их алиасов
-        registerGameModeCommands(dispatcher);
+        // Регистрация команд для каждого режима
+        registerGameModeCommand(dispatcher, "survival", GameType.SURVIVAL, "Survival");
+        registerGameModeCommand(dispatcher, "creative", GameType.CREATIVE, "Creative");
+        registerGameModeCommand(dispatcher, "adventure", GameType.ADVENTURE, "Adventure");
+        registerGameModeCommand(dispatcher, "spectator", GameType.SPECTATOR, "Spectator");
     }
 
-    private static void registerGameModeCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
-        // Регистрируем команду для режима выживания и его алиасы
-        dispatcher.register(Commands.literal("survival")
-                .executes(context -> setGameMode(context.getSource(), GameType.SURVIVAL, "Survival"))
+    private static void registerGameModeCommand(CommandDispatcher<CommandSourceStack> dispatcher, String commandName, GameType gameMode, String modeName) {
+        // Регистрация команды и ее алиасов для каждого режима
+        dispatcher.register(Commands.literal(commandName)
+                .executes(context -> setGameMode(context.getSource(), gameMode, modeName))
         );
-        dispatcher.register(Commands.literal("esurvival")
-                .executes(context -> setGameMode(context.getSource(), GameType.SURVIVAL, "Survival"))
+        dispatcher.register(Commands.literal("e" + commandName)
+                .executes(context -> setGameMode(context.getSource(), gameMode, modeName))
         );
-        dispatcher.register(Commands.literal("survivalmode")
-                .executes(context -> setGameMode(context.getSource(), GameType.SURVIVAL, "Survival"))
+        dispatcher.register(Commands.literal(commandName + "mode")
+                .executes(context -> setGameMode(context.getSource(), gameMode, modeName))
         );
-        dispatcher.register(Commands.literal("gms")
-                .executes(context -> setGameMode(context.getSource(), GameType.SURVIVAL, "Survival"))
-        );
-
-        // Регистрируем команду для творческого режима и его алиасы
-        dispatcher.register(Commands.literal("creative")
-                .executes(context -> setGameMode(context.getSource(), GameType.CREATIVE, "Creative"))
-        );
-        dispatcher.register(Commands.literal("eecreative")
-                .executes(context -> setGameMode(context.getSource(), GameType.CREATIVE, "Creative"))
-        );
-        dispatcher.register(Commands.literal("creativemode")
-                .executes(context -> setGameMode(context.getSource(), GameType.CREATIVE, "Creative"))
-        );
-        dispatcher.register(Commands.literal("gmc")
-                .executes(context -> setGameMode(context.getSource(), GameType.CREATIVE, "Creative"))
-        );
-
-        // Регистрируем команду для приключенческого режима и его алиасы
-        dispatcher.register(Commands.literal("adventure")
-                .executes(context -> setGameMode(context.getSource(), GameType.ADVENTURE, "Adventure"))
-        );
-        dispatcher.register(Commands.literal("eadventure")
-                .executes(context -> setGameMode(context.getSource(), GameType.ADVENTURE, "Adventure"))
-        );
-        dispatcher.register(Commands.literal("adventuremode")
-                .executes(context -> setGameMode(context.getSource(), GameType.ADVENTURE, "Adventure"))
-        );
-        dispatcher.register(Commands.literal("gma")
-                .executes(context -> setGameMode(context.getSource(), GameType.ADVENTURE, "Adventure"))
-        );
-
-        // Регистрируем команду для режима наблюдателя и его алиасы
-        dispatcher.register(Commands.literal("spectator")
-                .executes(context -> setGameMode(context.getSource(), GameType.SPECTATOR, "Spectator"))
-        );
-        dispatcher.register(Commands.literal("espectator")
-                .executes(context -> setGameMode(context.getSource(), GameType.SPECTATOR, "Spectator"))
-        );
-        dispatcher.register(Commands.literal("spec")
-                .executes(context -> setGameMode(context.getSource(), GameType.SPECTATOR, "Spectator"))
-        );
-        dispatcher.register(Commands.literal("gmsp")
-                .executes(context -> setGameMode(context.getSource(), GameType.SPECTATOR, "Spectator"))
+        dispatcher.register(Commands.literal("gm" + commandName.charAt(0)) // сокращенный вариант
+                .executes(context -> setGameMode(context.getSource(), gameMode, modeName))
         );
     }
 
     private static int setGameMode(CommandSourceStack source, GameType gameMode, String modeName) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.gm.only_players"));
             return 0;
         }
 
-        // Устанавливаем выбранный гейм-мод через player
+        // Устанавливаем выбранный гейм-мод
         player.setGameMode(gameMode);
 
-        // Уведомляем игрока об изменении гейм-мода
-        source.sendSuccess(Component.literal("Гейм-мод изменен на: " + modeName), true);
+        // Уведомляем игрока о смене гейм-мода
+        source.sendSuccess(Component.translatable("command.gm.mode_changed", modeName), true);
         return 1;
     }
 }

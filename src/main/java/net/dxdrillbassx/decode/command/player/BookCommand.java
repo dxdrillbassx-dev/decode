@@ -36,7 +36,7 @@ public class BookCommand {
 
     private static int openBook(CommandSourceStack source, String bookIdentifier) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.book.only_players"));
             return 0;
         }
 
@@ -46,8 +46,8 @@ public class BookCommand {
         // Выдаем книгу игроку
         player.addItem(bookStack);
 
-        // Можно использовать текст, чтобы дать информацию игроку
-        source.sendSuccess(Component.literal("Книга с идентификатором '" + bookIdentifier + "' выдана игроку."), true);
+        // Информируем игрока через локализованный текст
+        source.sendSuccess(Component.translatable("command.book.issued", bookIdentifier), true);
 
         return 1;
     }

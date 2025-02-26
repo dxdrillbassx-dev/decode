@@ -42,7 +42,7 @@ public class HomeCommand {
 
     private static int setHome(CommandSourceStack source, String name) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.sethome.only_players"));
             return 0;
         }
 
@@ -50,19 +50,19 @@ public class HomeCommand {
         Map<String, Vec3> homes = homePoints.computeIfAbsent(playerId, k -> Maps.newHashMap());
 
         if (homes.size() >= MAX_HOMES) {
-            source.sendFailure(Component.literal("Вы можете иметь только " + MAX_HOMES + " точки дома!"));
+            source.sendFailure(Component.translatable("command.sethome.max_homes", MAX_HOMES));
             return 0;
         }
 
         homes.put(name, player.position());
         HomeData.saveHomes(homePoints);
-        source.sendSuccess(Component.literal("Точка дома '" + name + "' сохранена!").withStyle(s -> s.withColor(0x00FF00)), true);
+        source.sendSuccess(Component.translatable("command.sethome.saved", name), true);
         return 1;
     }
 
     private static int teleportHome(CommandSourceStack source, String name) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.teleporthome.only_players"));
             return 0;
         }
 
@@ -70,18 +70,18 @@ public class HomeCommand {
         Map<String, Vec3> homes = homePoints.get(playerId);
 
         if (homes == null || !homes.containsKey(name)) {
-            source.sendFailure(Component.literal("Точка дома '" + name + "' не найдена!"));
+            source.sendFailure(Component.translatable("command.teleporthome.not_found", name));
             return 0;
         }
 
         player.teleportTo(homes.get(name).x, homes.get(name).y, homes.get(name).z);
-        source.sendSuccess(Component.literal("Телепортация к дому '" + name + "'").withStyle(s -> s.withColor(0x00AAFF)), true);
+        source.sendSuccess(Component.translatable("command.teleporthome.teleported", name), true);
         return 1;
     }
 
     private static int listHomes(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.listhomes.only_players"));
             return 0;
         }
 
@@ -89,11 +89,11 @@ public class HomeCommand {
         Map<String, Vec3> homes = homePoints.get(playerId);
 
         if (homes == null || homes.isEmpty()) {
-            source.sendFailure(Component.literal("У вас нет сохраненных точек дома!"));
+            source.sendFailure(Component.translatable("command.listhomes.no_homes"));
             return 0;
         }
 
-        StringBuilder homeList = new StringBuilder("Ваши точки дома: ");
+        StringBuilder homeList = new StringBuilder("Your homes: ");
         homes.forEach((name, pos) -> homeList.append("\n - ").append(name)
                 .append(" (X: ").append((int) pos.x)
                 .append(", Y: ").append((int) pos.y)

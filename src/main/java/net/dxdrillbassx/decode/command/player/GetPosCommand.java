@@ -41,7 +41,7 @@ public class GetPosCommand {
         ServerPlayer executor = (ServerPlayer) source.getEntity();
 
         if (executor == null) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.getpos.only_players"));
             return 0;
         }
 
@@ -49,7 +49,7 @@ public class GetPosCommand {
             // Получаем указанного игрока
             ServerPlayer targetPlayer = server.getPlayerList().getPlayerByName(playerName);
             if (targetPlayer == null) {
-                source.sendFailure(Component.literal("Игрок с таким именем не найден!"));
+                source.sendFailure(Component.translatable("command.getpos.player_not_found"));
                 return 0;
             }
 
@@ -59,7 +59,7 @@ public class GetPosCommand {
             double z = targetPlayer.getZ();
 
             // Отправляем сообщение с координатами
-            executor.sendSystemMessage(Component.literal(playerName + " находится в координатах: X=" + x + ", Y=" + y + ", Z=" + z));
+            executor.sendSystemMessage(Component.translatable("command.getpos.coordinates_other", playerName, x, y, z));
         } else {
             // Если игрок не указан, выводим координаты самого себя
             double x = executor.getX();
@@ -67,7 +67,7 @@ public class GetPosCommand {
             double z = executor.getZ();
 
             // Отправляем сообщение с координатами
-            executor.sendSystemMessage(Component.literal("Вы находитесь в координатах: X=" + x + ", Y=" + y + ", Z=" + z));
+            executor.sendSystemMessage(Component.translatable("command.getpos.coordinates_self", x, y, z));
         }
 
         return 1;

@@ -24,7 +24,9 @@ public class HomeData {
     }
 
     public static void loadHomes(Map<UUID, Map<String, Vec3>> homePoints) {
-        if (!HOME_FILE.exists()) return;
+        if (!HOME_FILE.exists()) {
+            return;
+        }
         try (FileReader reader = new FileReader(HOME_FILE)) {
             Map<UUID, Map<String, Vec3>> loadedHomes = GSON.fromJson(reader, HOME_TYPE);
             if (loadedHomes != null) {

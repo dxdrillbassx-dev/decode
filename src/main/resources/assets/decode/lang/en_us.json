@@ -61,5 +61,61 @@
   "command.reply.no_messages": "You cannot reply, as no messages have been received!",
   "command.reply.player_not_found": "No player found with that name!",
   "command.reply.sender_message": "%s -> %s",
-  "command.reply.receiver_message": "You -> %s"
+  "command.reply.receiver_message": "You -> %s",
+
+  "command.editsign.only_players": "Only players can use this command!",
+  "command.editsign.not_looking_at_block": "You must look at a block!",
+  "command.editsign.not_looking_at_sign": "You are not looking at a sign!",
+  "command.editsign.error_getting_sign": "Error getting sign!",
+  "command.editsign.text_changed": "Text on the sign changed!",
+  "command.editsign.cleared": "Sign cleared!",
+  "command.editsign.copied": "Sign copied!",
+  "command.editsign.clipboard_empty": "Clipboard is empty!",
+  "command.editsign.text_pasted": "Text pasted on the sign!",
+
+  "command.sethome.only_players": "Only players can use this command!",
+  "command.sethome.max_homes": "You can only have %d home points!",
+  "command.sethome.saved": "Home point '%s' saved!",
+  "command.teleporthome.only_players": "Only players can use this command!",
+  "command.teleporthome.not_found": "Home point '%s' not found!",
+  "command.teleporthome.teleported": "Teleported to home '%s'!",
+  "command.listhomes.only_players": "Only players can use this command!",
+  "command.listhomes.no_homes": "You have no saved home points!",
+
+  "command.book.only_players": "Only players can use this command!",
+  "command.book.issued": "The book with identifier '%s' has been given to the player.",
+
+  "command.clearinventory.only_players": "Only players can use this command!",
+  "command.clearinventory.inventory_cleared": "Your inventory has been cleared",
+  "command.clearinventory.player_not_found": "No player with that name found",
+  "command.clearinventory.inventory_cleared_admin": "Your inventory has been cleared by administrator '%s'",
+  "command.clearinventory.inventory_cleared_target": "The inventory of player '%s' has been cleared",
+
+  "command.condense.only_players": "Only players can use this command!",
+  "command.condense.item_not_found": "Cannot find item with the name: %s",
+  "command.condense.cannot_condense": "This item cannot be condensed into a block.",
+  "command.condense.item_is_not_block": "This item is not a block.",
+  "command.condense.item_condensed": "Item %s has been condensed into a block.",
+  "command.condense.add_block_failed": "Failed to add the block to the inventory.",
+
+  "command.exp.give.success": "You received %s experience!",
+  "command.exp.give.failure.not_player": "Only players can use this command!",
+  "command.exp.give.failure.invalid_amount": "The amount of experience must be a positive number!",
+
+  "command.fly.toggle.on": "Fly mode enabled",
+  "command.fly.toggle.off": "Fly mode disabled",
+  "command.fly.only_players": "Only players can use this command!",
+
+  "command.getpos.player_not_found": "Player with that name not found!",
+  "command.getpos.only_players": "Only players can use this command!",
+  "command.getpos.coordinates_self": "You are at coordinates: X={x}, Y={y}, Z={z}",
+  "command.getpos.coordinates_other": "{playerName} is at coordinates: X={x}, Y={y}, Z={z}",
+
+  "command.gm.only_players": "Only players can use this command!",
+  "command.gm.mode_changed": "Game mode changed to: {mode}",
+
+  "command.god.only_players": "Only players can use this command!",
+  "command.god.enabled": "God mode enabled",
+  "command.god.disabled": "God mode disabled",
+  "command.god.no_permission": "You do not have permission to use this command!"
 }

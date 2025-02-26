@@ -33,13 +33,13 @@ public class ClearInventoryCommand {
     private static int clearInventory(CommandSourceStack source) {
         // Проверяем, является ли командующий игроком
         if (!(source.getEntity() instanceof Player player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.clearinventory.only_players"));
             return 0;
         }
 
         // Очищаем инвентарь игрока
         player.getInventory().clearContent();
-        player.sendSystemMessage(Component.literal("Ваш инвентарь был очищен"));
+        player.sendSystemMessage(Component.translatable("command.clearinventory.inventory_cleared"));
 
         return 1;
     }
@@ -47,22 +47,22 @@ public class ClearInventoryCommand {
     private static int clearInventoryOfPlayer(CommandSourceStack source, String playerName) {
         // Проверяем, является ли командующий игроком
         if (!(source.getEntity() instanceof Player admin)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.clearinventory.only_players"));
             return 0;
         }
 
         // Находим игрока по имени
         Player target = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (target == null) {
-            source.sendFailure(Component.literal("Игрок с таким именем не найден"));
+            source.sendFailure(Component.translatable("command.clearinventory.player_not_found"));
             return 0;
         }
 
         // Очищаем инвентарь другого игрока
         target.getInventory().clearContent();
-        target.sendSystemMessage(Component.literal("Ваш инвентарь был очищен администратором " + admin.getName().getString()));
+        target.sendSystemMessage(Component.translatable("command.clearinventory.inventory_cleared_admin", admin.getName().getString()));
 
-        admin.sendSystemMessage(Component.literal("Инвентарь игрока " + playerName + " был очищен"));
+        admin.sendSystemMessage(Component.translatable("command.clearinventory.inventory_cleared_target", playerName));
 
         return 1;
     }
