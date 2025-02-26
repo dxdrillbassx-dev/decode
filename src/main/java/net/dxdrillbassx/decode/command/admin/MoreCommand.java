@@ -18,49 +18,41 @@ public class MoreCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрация команды /more
         dispatcher.register(Commands.literal("more")
-                .then(Commands.argument("amount", IntegerArgumentType.integer(1, 64)) // Указание максимума 64 (максимум для стеков предметов)
+                .then(Commands.argument("amount", IntegerArgumentType.integer(1, 64))
                         .executes(context -> {
                             int amount = IntegerArgumentType.getInteger(context, "amount");
                             return executeMoreCommand(context.getSource(), amount);
                         })
                 )
-                .executes(context -> {
-                    return executeMoreCommand(context.getSource(), -1); // Если количество не указано, заполняем до максимума
-                })
+                .executes(context -> executeMoreCommand(context.getSource(), -1))
         );
 
-        // Альтернативное название команды
         dispatcher.register(Commands.literal("emore").redirect(dispatcher.getRoot().getChild("more")));
     }
 
     private static int executeMoreCommand(CommandSourceStack source, int amount) {
-        // Проверяем, что это игрок
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.more.only_player"));
             return 0;
         }
 
-        // Получаем предмет в руке
         ItemStack heldItem = player.getMainHandItem();
         if (heldItem.isEmpty()) {
-            source.sendFailure(Component.literal("Вы должны держать предмет в руке!"));
+            source.sendFailure(Component.translatable("command.more.no_item"));
             return 0;
         }
 
-        // Если не указано количество, заполняем до максимума (64)
         if (amount == -1) {
             amount = heldItem.getMaxStackSize();
         }
 
-        // Добавляем в инвентарь игрока
-        int addAmount = Math.min(amount, heldItem.getMaxStackSize()) - heldItem.getCount(); // Количество для добавления
+        int addAmount = Math.min(amount, heldItem.getMaxStackSize()) - heldItem.getCount();
         if (addAmount > 0) {
-            heldItem.grow(addAmount); // Увеличиваем количество предметов в руке
-            source.sendSuccess(Component.literal("Предмет в руке был заполнен до " + heldItem.getCount() + " штук."), false);
+            heldItem.grow(addAmount);
+            source.sendSuccess(Component.translatable("command.more.success", heldItem.getCount()), false);
         } else {
-            source.sendFailure(Component.literal("У вас уже максимальное количество предметов в руке."));
+            source.sendFailure(Component.translatable("command.more.max_reached"));
             return 0;
         }
 

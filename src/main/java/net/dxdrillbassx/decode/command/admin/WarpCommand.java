@@ -54,55 +54,55 @@ public class WarpCommand {
 
     private static int setWarp(CommandSourceStack source, String name) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.warp.only_player"));
             return 0;
         }
 
         warps.put(name, new double[]{player.getX(), player.getY(), player.getZ()});
         saveWarps();
 
-        player.sendSystemMessage(Component.literal("Варп '" + name + "' установлен!"));
+        player.sendSystemMessage(Component.translatable("command.warp.set_success", name));
         return 1;
     }
 
     private static int teleportToWarp(CommandSourceStack source, String name) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.warp.only_player"));
             return 0;
         }
 
         if (!warps.containsKey(name)) {
-            source.sendFailure(Component.literal("Варп '" + name + "' не найден!"));
+            source.sendFailure(Component.translatable("command.warp.not_found", name));
             return 0;
         }
 
         double[] pos = warps.get(name);
         player.teleportTo(pos[0], pos[1], pos[2]);
-        player.sendSystemMessage(Component.literal("Телепортация к варпу '" + name + "'!"));
+        player.sendSystemMessage(Component.translatable("command.warp.teleport_success", name));
         return 1;
     }
 
     private static int deleteWarp(CommandSourceStack source, String name) {
         if (!warps.containsKey(name)) {
-            source.sendFailure(Component.literal("Варп '" + name + "' не найден!"));
+            source.sendFailure(Component.translatable("command.warp.not_found", name));
             return 0;
         }
 
         warps.remove(name);
         saveWarps();
 
-        source.sendSuccess(Component.literal("Варп '" + name + "' удален!"), true);
+        source.sendSuccess(Component.translatable("command.warp.delete_success", name), true);
         return 1;
     }
 
     private static int listWarps(CommandSourceStack source) {
         if (warps.isEmpty()) {
-            source.sendFailure(Component.literal("Нет доступных варпов!"));
+            source.sendFailure(Component.translatable("command.warp.no_warps"));
             return 0;
         }
 
         Set<String> warpNames = warps.keySet();
-        source.sendSuccess(Component.literal("Доступные варпы: " + String.join(", ", warpNames)), false);
+        source.sendSuccess(Component.translatable("command.warp.list_success", String.join(", ", warpNames)), false);
         return 1;
     }
 
@@ -112,7 +112,7 @@ public class WarpCommand {
         try (FileReader reader = new FileReader(WARPS_FILE)) {
             warps = GSON.fromJson(reader, TYPE);
         } catch (Exception e) {
-            System.err.println("Ошибка при загрузке варпов: " + e.getMessage());
+            System.err.println(Component.translatable("command.warp.load_error", e.getMessage()));
         }
     }
 
@@ -120,7 +120,8 @@ public class WarpCommand {
         try (FileWriter writer = new FileWriter(WARPS_FILE)) {
             GSON.toJson(warps, writer);
         } catch (Exception e) {
-            System.err.println("Ошибка при сохранении варпов: " + e.getMessage());
+            System.err.println(Component.translatable("command.warp.save_error", e.getMessage()));
         }
     }
+
 }

@@ -19,7 +19,6 @@ public class KickAllCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрация команды kickall
         dispatcher.register(Commands.literal("kickall")
                 .then(Commands.argument("reason", StringArgumentType.string())
                         .executes(context -> {
@@ -29,24 +28,19 @@ public class KickAllCommand {
                 )
         );
 
-        // Альтернативные названия команды
         dispatcher.register(Commands.literal("ekickall").redirect(dispatcher.getRoot().getChild("kickall")));
     }
 
     private static int executeKickAllCommand(CommandSourceStack source, String reason) throws CommandSyntaxException {
-        // Получаем сервер
         MinecraftServer server = source.getServer();
 
-        // Получаем список всех игроков
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            // Не выкидываем игрока, который выполнил команду
             if (player != source.getPlayerOrException()) {
-                // Выкидываем игрока с сообщением о причине
-                player.connection.disconnect(Component.literal("Вы были выкинуты с сервера. Причина: " + reason));
+                player.connection.disconnect(Component.translatable("command.kickall.kicked", reason));
             }
         }
 
-        source.sendSuccess(Component.literal("Все игроки (кроме вас) были выкинуты. Причина: " + reason), false);
+        source.sendSuccess(Component.translatable("command.kickall.success", reason), false);
         return 1;
     }
 }

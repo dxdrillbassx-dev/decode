@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,29 +15,23 @@ public class SpawnCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрируем команду /spawn
         dispatcher.register(Commands.literal("spawn")
                 .executes(context -> teleportToSpawn(context.getSource()))
         );
     }
 
     private static int teleportToSpawn(CommandSourceStack source) {
-        // Проверяем, является ли командующий игроком
-        if (!(source.getEntity() instanceof Player player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+        if (!(source.getEntity() instanceof ServerPlayer player)) {
+            source.sendFailure(Component.translatable("command.spawn.only_player"));
             return 0;
         }
 
-        // Получаем координаты спауна
-        double spawnX = player.level.getLevelData().getXSpawn();
-        double spawnY = player.level.getLevelData().getYSpawn();
-        double spawnZ = player.level.getLevelData().getZSpawn();
+        double spawnX = player.getLevel().getLevelData().getXSpawn();
+        double spawnY = player.getLevel().getLevelData().getYSpawn();
+        double spawnZ = player.getLevel().getLevelData().getZSpawn();
 
-        // Телепортируем игрока на точку спауна
         player.teleportTo(spawnX, spawnY, spawnZ);
-
-        // Уведомляем игрока
-        player.sendSystemMessage(Component.literal("Вы были телепортированы на спаун!"));
+        player.sendSystemMessage(Component.translatable("command.spawn.success"));
 
         return 1;
     }

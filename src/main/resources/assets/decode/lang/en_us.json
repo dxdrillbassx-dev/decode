@@ -1,4 +1,35 @@
 {
   "block.decode.custom_block": "Custom Block",
-  "itemGroup.decode_tab": "DeCode Mod"
+  "itemGroup.decode_tab": "DeCode Mod",
+
+  "command.clear.only_players": "Only players can use this command!",
+  "command.clear.chat_cleared": "Chat cleared!",
+
+  "command.kickall.kicked": "You have been kicked from the server. Reason: %s",
+  "command.kickall.success": "All players (except you) have been kicked. Reason: %s",
+
+  "command.kick.not_found": "Player with name %s not found.",
+  "command.kick.kicked": "You have been kicked from the server. Reason: %s",
+  "command.kick.success": "Player %s has been kicked. Reason: %s",
+
+  "command.killall.only_player": "Only a player can use this command!",
+  "command.killall.success": "All entities within range have been killed!",
+
+  "command.more.only_player": "Only players can use this command!",
+  "command.more.no_item": "You must hold an item in your hand!",
+  "command.more.success": "The item in your hand has been filled up to %s.",
+  "command.more.max_reached": "You already have the maximum amount of this item.",
+
+  "command.spawn.only_player": "Only players can use this command!",
+  "command.spawn.success": "You have been teleported to spawn!",
+
+  "command.warp.only_player": "Only players can use this command!",
+  "command.warp.set_success": "Warp '%s' set!",
+  "command.warp.teleport_success": "Teleporting to warp '%s'!",
+  "command.warp.not_found": "Warp '%s' not found!",
+  "command.warp.delete_success": "Warp '%s' deleted!",
+  "command.warp.no_warps": "No warps available!",
+  "command.warp.list_success": "Available warps: %s",
+  "command.warp.load_error": "Error loading warps: %s",
+  "command.warp.save_error": "Error saving warps: %s"
 }

@@ -1,4 +1,35 @@
 {
   "block.decode.custom_block": "Кастомный блок",
-  "itemGroup.decode_tab": "Мод DeCode"
+  "itemGroup.decode_tab": "Мод DeCode",
+
+  "command.clear.only_players": "Только игроки могут использовать эту команду!",
+  "command.clear.chat_cleared": "Чат очищен!",
+
+  "command.kickall.kicked": "Вы были выкинуты с сервера. Причина: %s",
+  "command.kickall.success": "Все игроки (кроме вас) были выкинуты. Причина: %s",
+
+  "command.kick.not_found": "Игрок с именем %s не найден.",
+  "command.kick.kicked": "Вы были выкинуты с сервера. Причина: %s",
+  "command.kick.success": "Игрок %s был выкинут. Причина: %s",
+
+  "command.killall.only_player": "Эту команду может использовать только игрок!",
+  "command.killall.success": "Все сущности в радиусе были убиты!",
+
+  "command.more.only_player": "Только игроки могут использовать эту команду!",
+  "command.more.no_item": "Вы должны держать предмет в руке!",
+  "command.more.success": "Предмет в руке был заполнен до %s штук.",
+  "command.more.max_reached": "У вас уже максимальное количество предметов в руке.",
+
+  "command.spawn.only_player": "Только игроки могут использовать эту команду!",
+  "command.spawn.success": "Вы были телепортированы на спаун!",
+
+  "command.warp.only_player": "Только игроки могут использовать эту команду!",
+  "command.warp.set_success": "Варп '%s' установлен!",
+  "command.warp.teleport_success": "Телепортация к варпу '%s'!",
+  "command.warp.not_found": "Варп '%s' не найден!",
+  "command.warp.delete_success": "Варп '%s' удален!",
+  "command.warp.no_warps": "Нет доступных варпов!",
+  "command.warp.list_success": "Доступные варпы: %s",
+  "command.warp.load_error": "Ошибка при загрузке варпов: %s",
+  "command.warp.save_error": "Ошибка при сохранении варпов: %s"
 }

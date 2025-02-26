@@ -18,7 +18,6 @@ public class KillAllCommand {
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрируем команду /killall
         dispatcher.register(Commands.literal("killall")
                 .executes(context -> killAllEntities(context.getSource()))
         );
@@ -26,18 +25,17 @@ public class KillAllCommand {
 
     private static int killAllEntities(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Эту команду может использовать только игрок!"));
+            source.sendFailure(Component.translatable("command.killall.only_player"));
             return 0;
         }
 
         Level level = player.getLevel();
 
-        // Используем getEntitiesOfClass для получения всех живых существ
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(100))) {  // Увеличиваем радиус на 100 блоков
+        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(100))) {
             entity.kill();
         }
 
-        source.sendSuccess(Component.literal("Все сущности в радиусе были убиты!"), false);
+        source.sendSuccess(Component.translatable("command.killall.success"), false);
         return 1;
     }
 }
