@@ -93,8 +93,4 @@ public class MsgToggleCommand {
         return 1;
     }
 
-    // Получить статус блокировки приватных сообщений для игрока
-    public static boolean isMsgBlocked(String playerName) {
-        return msgToggleStatus.getOrDefault(playerName, false);
-    }
 }

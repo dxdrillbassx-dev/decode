@@ -36,10 +36,6 @@ public class KickAllCommand {
     private static int executeKickAllCommand(CommandSourceStack source, String reason) throws CommandSyntaxException {
         // Получаем сервер
         MinecraftServer server = source.getServer();
-        if (server == null) {
-            source.sendFailure(Component.literal("Сервер не найден."));
-            return 0;
-        }
 
         // Получаем список всех игроков
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {

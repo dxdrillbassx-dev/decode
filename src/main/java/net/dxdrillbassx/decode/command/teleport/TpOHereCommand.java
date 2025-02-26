@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
 public class TpOHereCommand {
 
+    private static ServerPlayer player;
+
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
@@ -71,10 +73,18 @@ public class TpOHereCommand {
     }
 
     private static boolean isTeleportBlocked(ServerPlayer player) {
+        TpOHereCommand.player = player;
         // Логика для проверки, заблокирована ли телепортация для игрока
         // В примере проверяется некая система блокировки с помощью tptoggle, но вы можете использовать свою систему
-        // Пример:
         // return teleportBlockList.contains(player.getUUID());
         return false; // Заглушка, пока не реализовано
+    }
+
+    public static ServerPlayer getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(ServerPlayer player) {
+        TpOHereCommand.player = player;
     }
 }

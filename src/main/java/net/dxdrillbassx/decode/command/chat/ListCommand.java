@@ -35,7 +35,7 @@ public class ListCommand {
         level.players().forEach(p -> playerList.append(p.getName().getString()).append(", "));
 
         // Убираем последнюю запятую и пробел
-        if (playerList.length() > 0) {
+        if (!playerList.isEmpty()) {
             playerList.setLength(playerList.length() - 2);
         }
 

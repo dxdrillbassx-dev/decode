@@ -38,10 +38,6 @@ public class WhoisCommand {
     private static int executeWhoisCommand(CommandSourceStack source, String playerName) {
         // Получаем игрока по имени
         MinecraftServer server = source.getServer();
-        if (server == null) {
-            source.sendFailure(Component.literal("Ошибка сервера."));
-            return 0;
-        }
 
         ServerPlayer targetPlayer = null;
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
@@ -59,19 +55,17 @@ public class WhoisCommand {
         // Формируем информацию об игроке
         StringBuilder info = new StringBuilder();
         info.append("Информация о игроке ").append(targetPlayer.getName().getString()).append(":\n")
-                .append("UUID: ").append(targetPlayer.getUUID().toString()).append("\n")
+                .append("UUID: ").append(targetPlayer.getUUID()).append("\n")
                 .append("Здоровье: ").append(targetPlayer.getHealth()).append("\n")
                 .append("Уровень: ").append(targetPlayer.experienceLevel).append("\n");
 
         // Получаем игровой режим
         ServerPlayerGameMode gameMode = targetPlayer.gameMode;
-        if (gameMode != null) {
-            info.append("Игровой режим: ").append(gameMode.toString()).append("\n");
-        }
+        info.append("Игровой режим: ").append(gameMode).append("\n");
 
         // Получаем IP-адрес игрока (если доступно)
         try {
-            String playerIp = Objects.requireNonNull(targetPlayer.getServer()).getConnection().getConnections().toString();
+            String playerIp = Objects.requireNonNull(Objects.requireNonNull(targetPlayer.getServer()).getConnection()).getConnections().toString();
             info.append("IP-адрес: ").append(playerIp).append("\n");
         } catch (Exception e) {
             info.append("IP-адрес: Не доступен\n");

@@ -5,8 +5,8 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -43,12 +43,12 @@ public class TimeCommand {
             return 0;
         }
 
-        Level level = player.getLevel();
+        ServerLevel level = player.getLevel();
         if ("day".equals(timeOfDay)) {
-            ((net.minecraft.server.level.ServerLevel) level).setDayTime(1000);
+            level.setDayTime(1000);
             source.sendSuccess(Component.literal("Время установлено на день!"), true);
         } else if ("night".equals(timeOfDay)) {
-            ((net.minecraft.server.level.ServerLevel) level).setDayTime(13000);
+            level.setDayTime(13000);
             source.sendSuccess(Component.literal("Время установлено на ночь!"), true);
         } else {
             source.sendFailure(Component.literal("Неверный аргумент. Используйте /time day, /time night или /time set <time>."));
@@ -64,8 +64,8 @@ public class TimeCommand {
             return 0;
         }
 
-        Level level = player.getLevel();
-        ((net.minecraft.server.level.ServerLevel) level).setDayTime(time);
+        ServerLevel level = player.getLevel();
+        level.setDayTime(time);
         source.sendSuccess(Component.literal("Время установлено на " + time + "!"), true);
 
         return 1;

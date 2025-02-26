@@ -38,7 +38,7 @@ public class SetTprCommand {
     }
 
     private static int setTpr(CommandSourceStack source, String center, int minRange, int maxRange, int value) {
-        if (!(source.getEntity() instanceof ServerPlayer player)) {
+        if (!(source.getEntity() instanceof ServerPlayer)) {
             source.sendFailure(Component.literal("Эту команду может использовать только игрок!"));
             return 0;
         }

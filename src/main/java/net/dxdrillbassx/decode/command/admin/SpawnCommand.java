@@ -29,13 +29,12 @@ public class SpawnCommand {
         }
 
         // Получаем координаты спауна
-        Player entity = player;
-        double spawnX = entity.level.getLevelData().getXSpawn();
-        double spawnY = entity.level.getLevelData().getYSpawn();
-        double spawnZ = entity.level.getLevelData().getZSpawn();
+        double spawnX = player.level.getLevelData().getXSpawn();
+        double spawnY = player.level.getLevelData().getYSpawn();
+        double spawnZ = player.level.getLevelData().getZSpawn();
 
         // Телепортируем игрока на точку спауна
-        entity.teleportTo(spawnX, spawnY, spawnZ);
+        player.teleportTo(spawnX, spawnY, spawnZ);
 
         // Уведомляем игрока
         player.sendSystemMessage(Component.literal("Вы были телепортированы на спаун!"));

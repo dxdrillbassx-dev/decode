@@ -33,9 +33,6 @@ public class LevelCommand {
             return 0;
         }
 
-        // Получаем текущее количество опыта игрока
-        int currentLevel = player.experienceLevel;
-
         // Увеличиваем уровень игрока
         player.giveExperienceLevels(amount);
 

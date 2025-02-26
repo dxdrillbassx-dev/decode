@@ -19,7 +19,7 @@ public class HomeData {
         try (FileWriter writer = new FileWriter(HOME_FILE)) {
             GSON.toJson(homePoints, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Ошибка при сохранении данных домов: " + e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class HomeData {
                 homePoints.putAll(loadedHomes);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Ошибка при загрузке данных домов: " + e.getMessage());
         }
     }
 }

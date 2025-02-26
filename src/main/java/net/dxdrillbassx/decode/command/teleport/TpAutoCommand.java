@@ -83,8 +83,4 @@ public class TpAutoCommand {
         return 1;
     }
 
-    // Получить статус автоподтверждения телепортации для игрока
-    public static boolean isTpAutoEnabled(String playerName) {
-        return tpAutoStatus.getOrDefault(playerName, false);
-    }
 }

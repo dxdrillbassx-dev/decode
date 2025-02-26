@@ -31,10 +31,6 @@ public class KillAllCommand {
         }
 
         Level level = player.getLevel();
-        if (level == null) {
-            source.sendFailure(Component.literal("Ошибка при получении мира!"));
-            return 0;
-        }
 
         // Используем getEntitiesOfClass для получения всех живых существ
         for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(100))) {  // Увеличиваем радиус на 100 блоков

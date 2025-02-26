@@ -93,7 +93,7 @@ public class GCCommand {
     private static int executeUptime(CommandSourceStack source) {
         // Получаем время работы сервера, используя getTickCount()
         MinecraftServer server = source.getServer();
-        long uptimeMillis = server.getTickCount() * 50;  // Каждый тик длится 50 миллисекунд
+        long uptimeMillis = server.getTickCount() * 50L;  // Каждый тик длится 50 миллисекунд
         Duration uptime = Duration.ofMillis(uptimeMillis);
 
         // Отправляем сообщение о времени работы

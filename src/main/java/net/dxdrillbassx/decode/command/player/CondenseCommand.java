@@ -106,16 +106,12 @@ public class CondenseCommand {
 
     private static Item getItemFromName(String name) {
         // В этом методе вы можете настроить преобразование имени в соответствующий предмет.
-        switch (name.toLowerCase()) {
-            case "iron_ingot":
-                return Items.IRON_INGOT;
-            case "gold_ingot":
-                return Items.GOLD_INGOT;
-            case "diamond":
-                return Items.DIAMOND;
+        return switch (name.toLowerCase()) {
+            case "iron_ingot" -> Items.IRON_INGOT;
+            case "gold_ingot" -> Items.GOLD_INGOT;
+            case "diamond" -> Items.DIAMOND;
             // Добавьте сюда другие предметы по вашему усмотрению
-            default:
-                return null;
-        }
+            default -> null;
+        };
     }
 }

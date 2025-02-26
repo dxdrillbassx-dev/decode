@@ -112,7 +112,7 @@ public class WarpCommand {
         try (FileReader reader = new FileReader(WARPS_FILE)) {
             warps = GSON.fromJson(reader, TYPE);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Ошибка при загрузке варпов: " + e.getMessage());
         }
     }
 
@@ -120,7 +120,7 @@ public class WarpCommand {
         try (FileWriter writer = new FileWriter(WARPS_FILE)) {
             GSON.toJson(warps, writer);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Ошибка при сохранении варпов: " + e.getMessage());
         }
     }
 }
