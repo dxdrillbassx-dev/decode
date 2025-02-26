@@ -33,26 +33,26 @@ public class ReplyCommand {
 
     private static int replyToMessage(CommandSourceStack source, String message) {
         if (!(source.getEntity() instanceof ServerPlayer sender)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.reply.only_players"));
             return 0;
         }
 
         // Проверяем, был ли получен последний игрок для ответа
         String lastPlayerName = lastMessagedPlayer.get(sender);
         if (lastPlayerName == null) {
-            source.sendFailure(Component.literal("Вы не можете ответить, так как не было получено сообщений!"));
+            source.sendFailure(Component.translatable("command.reply.no_messages"));
             return 0;
         }
 
         ServerPlayer receiver = source.getServer().getPlayerList().getPlayerByName(lastPlayerName);
         if (receiver == null) {
-            source.sendFailure(Component.literal("Игрок с таким именем не найден!"));
+            source.sendFailure(Component.translatable("command.reply.player_not_found"));
             return 0;
         }
 
         // Отправляем сообщение
-        receiver.sendSystemMessage(Component.literal(sender.getName().getString() + " -> " + message));
-        sender.sendSystemMessage(Component.literal("Вы -> " + message));
+        receiver.sendSystemMessage(Component.translatable("command.reply.sender_message", sender.getName().getString(), message));
+        sender.sendSystemMessage(Component.translatable("command.reply.receiver_message", message));
 
         return 1;
     }

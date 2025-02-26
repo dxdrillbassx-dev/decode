@@ -16,8 +16,6 @@ public class ListCommand {
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-
-        // Регистрируем команду /list
         dispatcher.register(Commands.literal("list")
                 .executes(context -> listPlayers(context.getSource()))
         );
@@ -25,21 +23,21 @@ public class ListCommand {
 
     private static int listPlayers(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.list.only_players"));
             return 0;
         }
 
-        // Получаем всех игроков на сервере
         ServerLevel level = player.getLevel();
-        StringBuilder playerList = new StringBuilder("Игроки онлайн: ");
+        StringBuilder playerList = new StringBuilder(Component.translatable("command.list.players_online").getString());
+
         level.players().forEach(p -> playerList.append(p.getName().getString()).append(", "));
 
-        // Убираем последнюю запятую и пробел
-        if (!playerList.isEmpty()) {
+        if (playerList.length() > 14) {
             playerList.setLength(playerList.length() - 2);
+        } else {
+            playerList.append(Component.translatable("command.list.no_players_online").getString());
         }
 
-        // Отправляем список игрокам
         source.sendSystemMessage(Component.literal(playerList.toString()));
 
         return 1;

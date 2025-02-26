@@ -38,7 +38,7 @@ public class NickCommand {
 
     private static int setNick(CommandSourceStack source, String nickname) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.literal("command.nick.only_players"));
             return 0;
         }
 
@@ -47,35 +47,35 @@ public class NickCommand {
         }
 
         nicknames.put(player.getUUID(), nickname);
-        player.sendSystemMessage(Component.literal("Ваш ник теперь: " + getFullNick(player)));
+        player.sendSystemMessage(Component.literal("command.nick.set").append(Component.literal(getFullNick(player))));
         return 1;
     }
 
     private static int setPrefix(CommandSourceStack source, String prefix) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.literal("command.nick.only_players"));
             return 0;
         }
 
         prefixes.put(player.getUUID(), prefix);
-        player.sendSystemMessage(Component.literal("Ваш префикс установлен: " + prefix));
+        player.sendSystemMessage(Component.literal("command.prefix.set").append(Component.literal(prefix)));
         return 1;
     }
 
     private static int setSuffix(CommandSourceStack source, String suffix) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.literal("command.nick.only_players"));
             return 0;
         }
 
         suffixes.put(player.getUUID(), suffix);
-        player.sendSystemMessage(Component.literal("Ваш суффикс установлен: " + suffix));
+        player.sendSystemMessage(Component.literal("command.suffix.set").append(Component.literal(suffix)));
         return 1;
     }
 
     private static int resetNick(CommandSourceStack source) {
         if (!(source.getEntity() instanceof ServerPlayer player)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.literal("command.nick.only_players"));
             return 0;
         }
 
@@ -83,7 +83,7 @@ public class NickCommand {
         prefixes.remove(player.getUUID());
         suffixes.remove(player.getUUID());
 
-        player.sendSystemMessage(Component.literal("Ваш ник был сброшен."));
+        player.sendSystemMessage(Component.literal("command.nick.reset"));
         return 1;
     }
 

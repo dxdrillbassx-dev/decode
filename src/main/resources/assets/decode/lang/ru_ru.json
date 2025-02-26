@@ -31,5 +31,35 @@
   "command.warp.no_warps": "Нет доступных варпов!",
   "command.warp.list_success": "Доступные варпы: %s",
   "command.warp.load_error": "Ошибка при загрузке варпов: %s",
-  "command.warp.save_error": "Ошибка при сохранении варпов: %s"
+  "command.warp.save_error": "Ошибка при сохранении варпов: %s",
+
+  "command.list.only_players": "Только игроки могут использовать эту команду!",
+  "command.list.players_online": "Игроки онлайн: ",
+  "command.list.no_players_online": "Нет игроков онлайн",
+
+  "command.msg.only_players": "Только игроки могут использовать эту команду!",
+  "command.msg.player_not_found": "Игрок с таким именем не найден!",
+  "command.msg.sender_message": "%s -> %s",
+  "command.msg.receiver_message": "Вы -> %s",
+
+  "command.msgtoggle.only_players": "Только игроки могут использовать эту команду!",
+  "command.msgtoggle.player_not_found": "Игрок с таким именем не найден!",
+  "command.msgtoggle.specify_state": "Укажите состояние: on или off!",
+  "command.msgtoggle.invalid_state": "Неверное состояние. Укажите 'on' или 'off'.",
+  "command.msgtoggle.blocked": "заблокировал все приватные сообщения.",
+  "command.msgtoggle.unblocked": "разблокировал приватные сообщения.",
+  "command.msgtoggle.unblocked_self": "Теперь вы можете получать приватные сообщения.",
+  "command.msgtoggle.blocked_self": "Вы заблокировали получение приватных сообщений.",
+
+  "command.nick.only_players": "Только игроки могут использовать эту команду!",
+  "command.nick.set": "Ваш ник теперь: ",
+  "command.prefix.set": "Ваш префикс установлен: ",
+  "command.suffix.set": "Ваш суффикс установлен: ",
+  "command.nick.reset": "Ваш ник был сброшен.",
+
+  "command.reply.only_players": "Только игроки могут использовать эту команду!",
+  "command.reply.no_messages": "Вы не можете ответить, так как не было получено сообщений!",
+  "command.reply.player_not_found": "Игрок с таким именем не найден!",
+  "command.reply.sender_message": "%s -> %s",
+  "command.reply.receiver_message": "Вы -> %s"
 }

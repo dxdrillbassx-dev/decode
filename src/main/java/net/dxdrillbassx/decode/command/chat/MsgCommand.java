@@ -36,14 +36,14 @@ public class MsgCommand {
 
     private static int sendMessage(CommandSourceStack source, String playerName, String message) {
         if (!(source.getEntity() instanceof ServerPlayer sender)) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.translatable("command.msg.only_players"));
             return 0;
         }
 
         // Получаем игрока по имени
         ServerPlayer receiver = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (receiver == null) {
-            source.sendFailure(Component.literal("Игрок с таким именем не найден!"));
+            source.sendFailure(Component.translatable("command.msg.player_not_found"));
             return 0;
         }
 
@@ -51,8 +51,8 @@ public class MsgCommand {
         lastMessagedPlayer.put(sender, receiver.getName().getString());
 
         // Отправляем сообщение
-        receiver.sendSystemMessage(Component.literal(sender.getName().getString() + " -> " + message));
-        sender.sendSystemMessage(Component.literal("Вы -> " + message));
+        receiver.sendSystemMessage(Component.translatable("command.msg.sender_message", sender.getName().getString(), message));
+        sender.sendSystemMessage(Component.translatable("command.msg.receiver_message", message));
 
         return 1;
     }

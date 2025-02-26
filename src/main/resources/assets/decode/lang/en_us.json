@@ -31,5 +31,35 @@
   "command.warp.no_warps": "No warps available!",
   "command.warp.list_success": "Available warps: %s",
   "command.warp.load_error": "Error loading warps: %s",
-  "command.warp.save_error": "Error saving warps: %s"
+  "command.warp.save_error": "Error saving warps: %s",
+
+  "command.list.only_players": "Only players can use this command!",
+  "command.list.players_online": "Players online: ",
+  "command.list.no_players_online": "No players online",
+
+  "command.msg.only_players": "Only players can use this command!",
+  "command.msg.player_not_found": "Player with that name not found!",
+  "command.msg.sender_message": "%s -> %s",
+  "command.msg.receiver_message": "You -> %s",
+
+  "command.msgtoggle.only_players": "Only players can use this command!",
+  "command.msgtoggle.player_not_found": "Player with that name not found!",
+  "command.msgtoggle.specify_state": "Specify the state: on or off!",
+  "command.msgtoggle.invalid_state": "Invalid state. Use 'on' or 'off'.",
+  "command.msgtoggle.blocked": "has blocked all private messages.",
+  "command.msgtoggle.unblocked": "has unblocked private messages.",
+  "command.msgtoggle.unblocked_self": "You can now receive private messages.",
+  "command.msgtoggle.blocked_self": "You have blocked receiving private messages.",
+
+  "command.nick.only_players": "Only players can use this command!",
+  "command.nick.set": "Your nickname is now: ",
+  "command.prefix.set": "Your prefix has been set to: ",
+  "command.suffix.set": "Your suffix has been set to: ",
+  "command.nick.reset": "Your nickname has been reset.",
+
+  "command.reply.only_players": "Only players can use this command!",
+  "command.reply.no_messages": "You cannot reply, as no messages have been received!",
+  "command.reply.player_not_found": "No player found with that name!",
+  "command.reply.sender_message": "%s -> %s",
+  "command.reply.receiver_message": "You -> %s"
 }

@@ -17,14 +17,12 @@ import java.util.Map;
 @Mod.EventBusSubscriber
 public class MsgToggleCommand {
 
-    // Хранение состояния для блокировки приватных сообщений для каждого игрока
     private static final Map<String, Boolean> msgToggleStatus = new HashMap<>();
 
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        // Регистрация команды msgtoggle
         dispatcher.register(Commands.literal("msgtoggle")
                 .then(Commands.argument("player", StringArgumentType.string())
                         .then(Commands.argument("state", StringArgumentType.word())
@@ -35,13 +33,9 @@ public class MsgToggleCommand {
                                 })
                         )
                 )
-                .executes(context -> {
-                    // Если игрок не указан, то применяем команду к себе
-                    return executeMsgToggle(context.getSource(), null, null);
-                })
+                .executes(context -> executeMsgToggle(context.getSource(), null, null))
         );
 
-        // Альтернативные названия команды
         dispatcher.register(Commands.literal("emsgtoggle").redirect(dispatcher.getRoot().getChild("msgtoggle")));
     }
 
@@ -50,43 +44,40 @@ public class MsgToggleCommand {
         ServerPlayer executor = (ServerPlayer) source.getEntity();
 
         if (executor == null) {
-            source.sendFailure(Component.literal("Только игроки могут использовать эту команду!"));
+            source.sendFailure(Component.literal("command.msgtoggle.only_players"));
             return 0;
         }
 
         if (playerName != null) {
-            // Получаем указанного игрока
             ServerPlayer targetPlayer = server.getPlayerList().getPlayerByName(playerName);
             if (targetPlayer == null) {
-                source.sendFailure(Component.literal("Игрок с таким именем не найден!"));
+                source.sendFailure(Component.literal("command.msgtoggle.player_not_found"));
                 return 0;
             }
 
             if (state == null) {
-                source.sendFailure(Component.literal("Укажите состояние: on или off!"));
+                source.sendFailure(Component.literal("command.msgtoggle.specify_state"));
                 return 0;
             }
 
-            // Переключаем статус блокировки сообщений для указанного игрока
             if (state.equalsIgnoreCase("on")) {
                 msgToggleStatus.put(playerName, true);
-                targetPlayer.sendSystemMessage(Component.literal(playerName + " заблокировал все приватные сообщения."));
+                targetPlayer.sendSystemMessage(Component.literal(playerName + " command.msgtoggle.blocked"));
             } else if (state.equalsIgnoreCase("off")) {
                 msgToggleStatus.put(playerName, false);
-                targetPlayer.sendSystemMessage(Component.literal(playerName + " разблокировал приватные сообщения."));
+                targetPlayer.sendSystemMessage(Component.literal(playerName + " command.msgtoggle.unblocked"));
             } else {
-                source.sendFailure(Component.literal("Неверное состояние. Укажите 'on' или 'off'."));
+                source.sendFailure(Component.literal("command.msgtoggle.invalid_state"));
                 return 0;
             }
         } else {
-            // Переключаем статус блокировки сообщений для себя
             boolean currentStatus = msgToggleStatus.getOrDefault(executor.getName().getString(), false);
             if (currentStatus) {
                 msgToggleStatus.put(executor.getName().getString(), false);
-                executor.sendSystemMessage(Component.literal("Вы теперь можете получать приватные сообщения."));
+                executor.sendSystemMessage(Component.literal("command.msgtoggle.unblocked_self"));
             } else {
                 msgToggleStatus.put(executor.getName().getString(), true);
-                executor.sendSystemMessage(Component.literal("Вы заблокировали получение приватных сообщений."));
+                executor.sendSystemMessage(Component.literal("command.msgtoggle.blocked_self"));
             }
         }
 
